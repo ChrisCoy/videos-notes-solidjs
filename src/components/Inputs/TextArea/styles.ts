@@ -1,18 +1,17 @@
-import styled from "styled-components";
-import { theme } from "../../../utils/constants";
+import { styled } from "solid-styled-components";
 
 export const TextAreaContainer = styled.div`
   width: 96%;
-  border-radius: 20px;
+  border-radius: 5px;
   overflow: hidden !important;
 `;
 
 export const TextArea = styled.textarea`
   resize: none;
-  height: 210px;
+  height: 180px;
   width: 100%;
-  border-radius: 20px;
-  padding: 20px;
+  border-radius: 5px;
+  padding: 10px;
   outline: none;
   border: none;
   background: #d1d1d1;
@@ -20,6 +19,6 @@ export const TextArea = styled.textarea`
   font-size: 16px;
 
   &:focus {
-    box-shadow: 0px 0px 0px 1px ${theme.blue} inset;
+    box-shadow: 0px 0px 0px 1px ${(p) => p.theme?.colors.blue} inset;
   }
 `;

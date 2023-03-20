@@ -11,8 +11,9 @@ export default function Button(props: ButtonProps) {
   const { children, onClick, noButton = false, style } = props;
 
   return (
-    <Styles.Wrapper {...props} noButton={noButton} onClick={onClick} style={style}>
+    <Styles.ButtonStyled {...props} noButton={noButton} onClick={onClick} style={style}>
       {children}
-    </Styles.Wrapper>
+    </Styles.ButtonStyled>
   );
 }
+

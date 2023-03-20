@@ -20,7 +20,7 @@ export const theme = {
   colors: {
     brand: "blue",
     bg: "#181818",
-    borderColors: "#2F2F2F",
+    borderColor: "#2F2F2F",
     text: "#2A2A2A",
     blue: "#3EA6FF",
   },
@@ -59,6 +59,6 @@ export const theme = {
   sizes: sizes,
   transitions: {
     default: "0.3s ease-in-out",
-    bounce: "all 400ms cubic-bezier(.47,1.64,.41,.8)",
+    bounce: "cubic-bezier(.47,1.64,.41,.8)",
   },
 };

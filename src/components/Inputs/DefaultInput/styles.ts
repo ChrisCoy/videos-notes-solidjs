@@ -5,6 +5,7 @@ export const Wrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column-reverse;
+  align-items: flex-start;
   gap: 4px;
   position: relative;
 
@@ -26,6 +27,7 @@ export const Wrapper = styled.div`
     left: 0.6rem;
     color: #777;
     font-size: 1.2rem;
+    z-index: 2;
   }
 
   input {

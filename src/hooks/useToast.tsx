@@ -1,8 +1,9 @@
 import { AiOutlineInfoCircle as InfoIcon } from "solid-icons/ai";
 import { IoWarningOutline as ErrorIcon } from "solid-icons/io";
-import { styled } from "solid-styled-components";
+import { keyframes, styled } from "solid-styled-components";
 import { createContext, For, JSX, useContext } from "solid-js";
 import { createStore } from "solid-js/store";
+import { theme } from "../styles/theme";
 
 const ToastContainer = styled.div`
   position: fixed;
@@ -15,6 +16,16 @@ const ToastContainer = styled.div`
   padding: 1rem;
   z-index: 9999999;
   /* background: red; */
+`;
+
+const animation = keyframes`
+  from{
+    transform: scale(0);
+  }
+
+  to{
+    transform: scale(1);
+  }
 `;
 
 const Message = styled.div`
@@ -31,6 +42,8 @@ const Message = styled.div`
   padding-top: 0.4rem;
   padding-bottom: 0.4rem;
   border: 1px solid white;
+
+  animation: ${animation} 0.4s ${(p) => p.theme?.transitions.bounce};
 `;
 
 interface ToastContextData {
@@ -46,7 +59,6 @@ type Messages = {
   message: string;
   type: "error" | "info";
 };
-
 
 export function ToastProvider(props: { children: JSX.Element }) {
   const [messages, setMessages] = createStore<Messages[]>([]);
@@ -78,7 +90,7 @@ export function ToastProvider(props: { children: JSX.Element }) {
                 </Message>
               );
             return (
-              <Message style={{ background: "#67b6ff" }}>
+              <Message style={{ background: theme.colors.blue }}>
                 <InfoIcon />
                 {message.message}
               </Message>

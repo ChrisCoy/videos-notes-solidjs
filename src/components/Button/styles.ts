@@ -1,7 +1,7 @@
 import { css, styled } from "solid-styled-components";
 import { theme } from "../../styles/theme";
 
-export const Wrapper = styled.button<{ noButton: boolean }>`
+export const ButtonStyled = styled.button<{ noButton: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,7 +25,11 @@ export const Wrapper = styled.button<{ noButton: boolean }>`
   }
 
   &:active {
-    outline: 2px solid white;
+    /* outline: 2px solid white; */
+    box-shadow: 0px 0px 0px 2px black, 0px 0px 0px 4px white;
+    border-color: ${(p) => p.theme?.colors.bg};
+    /* box-shadow: 0 0 10px 4px #0000ff, 0 0 20px 30px #008000, 30px 0 20px 30px #ff1493, */
+    /* -30px -30px 20px 30px #ff4500; */
   }
 
   ${(p) =>

@@ -1,42 +1,3 @@
-// import { globalStyle } from "@macaron-css/core";
-// import { theme } from "./theme";
-
-// globalStyle("*", {
-//   margin: 0,
-//   padding: 0,
-//   boxSizing: "border-box",
-//   WebkitTapHighlightColor: "rgba(0, 0, 0, 0)",
-//   ["-moz-tap-highlight-color" as any]: "rgba(0, 0, 0, 0)",
-//   WebkitFontSmoothing: "antialiased",
-//   MozOsxFontSmoothing: "grayscale",
-//   color: "white",
-// });
-
-// // globalStyle("html", {
-
-// // });
-
-// globalStyle("::before", {
-//   boxSizing: "inherit",
-// });
-
-// globalStyle("::after", {
-//   boxSizing: "inherit",
-// });
-
-// globalStyle("body", {
-//   height: "369px",
-//   width: "600px",
-//   fontFamily: "Roboto, sans-serif",
-//   fontSize: "1rem",
-// });
-
-// globalStyle("#root", {
-//   width: "100%",
-//   height: "100%",
-//   background: theme.color.bg,
-// });
-
 import { createGlobalStyles } from "solid-styled-components";
 import { theme } from "./theme";
 
@@ -57,7 +18,8 @@ export const globalStyle = createGlobalStyles`
 
   *:focus-visible{
     outline: none;
-    box-shadow: 0px 0px 5px #aaa;
+    box-shadow: 0px 0px 5px  #aaa;
+    z-index: 1;
   }
 
   html, body, #root {
@@ -66,18 +28,26 @@ export const globalStyle = createGlobalStyles`
 
   #root{
     background: ${theme.colors.bg};
+    height: 369px;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0px 0px 2px white;
   }
 
   body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
     font-family: "Roboto", Helvetica, sans-serif;
     color: white;
-    height: 369px;
-    width: 600px;
     font-size: 1rem;
+    background: #111;
   }
 
   ::-webkit-scrollbar {
     width: 5px;
+    height: 8px;
   }
   ::-webkit-scrollbar-track {
     border-radius: 10px;

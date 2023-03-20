@@ -16,24 +16,9 @@ interface DefaultInputProps extends JSX.InputHTMLAttributes<HTMLInputElement> {
 export const DefaultInput = (props: DefaultInputProps) => {
   const [isVisible, setIsVisible] = createSignal(false);
 
-  // createEffect(() => {
-  //   console.log(!props.isPassword || isVisible() ? "text" : "pw");
-  // });
-
-  console.log(isVisible() && props.type === "password" ? "text" : "password");
-  console.log(props.type === "password");
-  console.log(isVisible());
-
   const fieldType = () => (!isVisible() && props.type === "password" ? "password" : "text");
 
-  // setInterval(() => {
-  //   // console.log("teaste");
-
-  //   setIsVisible(!isVisible());
-  // }, 1000);
-
   return (
-    // <Styles.Wrapper className={className} error={error.error && error.touched ? true : false}>
     <Styles.Wrapper class={props.class}>
       <span>{props.icon}</span>
       <input {...props} id={props.inputLabel} name={props.inputLabel} type={fieldType()} />
@@ -54,7 +39,6 @@ export const DefaultInput = (props: DefaultInputProps) => {
           />
         </Show>
       </Show>
-      {/* {error.error && error.touched && <span>{error.error}</span>} */}
     </Styles.Wrapper>
   );
 };
