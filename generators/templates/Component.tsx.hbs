@@ -1,0 +1,17 @@
+import { Component, JSX } from "solid-js";
+import * as Styles from './styles'
+
+interface {{pascalCase name}}Props{
+  children?: JSX.Element;
+  class?: string;
+}
+
+const {{pascalCase name}}: Component<{{pascalCase name}}Props> = (props:{{pascalCase name}}Props) => {
+  return(
+    <Styles.{{pascalCase name}}Wrapper class={props.class}>
+      {props.children}
+    </Styles.{{pascalCase name}}Wrapper>
+  )
+};
+
+export { {{pascalCase name}} }
