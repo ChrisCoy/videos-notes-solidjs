@@ -8,11 +8,21 @@
     <meta name="theme-color" content="#000000" />
     <link rel="shortcut icon" type="image/ico" href="/src/assets/favicon.ico" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap"
       rel="stylesheet"
     />
     <title>Solid App</title>
-    <style></style>
+    <style>
+      body {
+        padding: 1rem;
+      }
+
+      @media (max-width: 450px) {
+        body {
+          padding: unset;
+        }
+      }
+    </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

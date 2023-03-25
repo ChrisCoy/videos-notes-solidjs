@@ -6,7 +6,7 @@ import { createStore } from "solid-js/store";
 import { theme } from "../styles/theme";
 
 const ToastContainer = styled.div`
-  position: fixed;
+  position: absolute;
   top: 0;
   right: 0;
   max-width: 250px;

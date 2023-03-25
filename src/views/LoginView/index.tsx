@@ -20,30 +20,31 @@ const LoginView: Component = ({}: LoginViewProps) => {
 
   function handleOnLogin(e: Event) {
     e.preventDefault();
-    const data = new FormData(e.target as HTMLFormElement);
-    console.log(data.get("Email"));
-    signInWithEmailAndPassword(auth, "", "") //credentials here
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user);
-        // ...
-      })
-      .catch((error) => {
-        toast.error(error.message);
-      });
+    navigate("/");
+    // const data = new FormData(e.target as HTMLFormElement);
+    // console.log(data.get("Email"));
+    // signInWithEmailAndPassword(auth, "", "") //credentials here
+    //   .then((userCredential) => {
+    //     const user = userCredential.user;
+    //     console.log(user);
+    //     // ...
+    //   })
+    //   .catch((error) => {
+    //     toast.error(error.message);
+    //   });
   }
 
   function handleOnSignUp() {
-    navigate("/register");
+    navigate("/account/register");
   }
 
   return (
-    <Styles.TitleContainer>
+    <Styles.LoginViewContainer>
       <Styles.Title>
         <LoginIcon />
         Login
       </Styles.Title>
-      <Styles.LoginFormWrapper onsubmit={handleOnLogin} id="testesss">
+      <Styles.LoginFormWrapper onsubmit={handleOnLogin}>
         <DefaultInput
           inputLabel="Email"
           icon={<AiOutlineMail />}
@@ -61,7 +62,7 @@ const LoginView: Component = ({}: LoginViewProps) => {
           Sign up
         </Button>
       </Styles.LoginFormWrapper>
-    </Styles.TitleContainer>
+    </Styles.LoginViewContainer>
   );
 };
 

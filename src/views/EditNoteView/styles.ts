@@ -1,6 +1,6 @@
 import { styled } from "solid-styled-components";
 
-export const CreateNoteWrapper = styled.div`
+export const EditNoteViewWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,12 +11,16 @@ export const CreateNoteWrapper = styled.div`
 
 export const TitleContainer = styled.div`
   display: flex;
-  width: 100%;
   align-items: center;
   gap: 1rem;
   padding-bottom: 0.5rem;
 
   border-bottom: 1px solid ${(p) => p.theme?.colors.borderColor};
+
+  h1 {
+    font-size: 1.4rem;
+    font-weight: 500;
+  }
 `;
 
 export const Timer = styled.div`

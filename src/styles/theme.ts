@@ -16,6 +16,13 @@ const sizes = {
   80: "20rem",
 };
 
+export const BREAKPOINTS = {
+  huge: "1440px",
+  large: "1170px",
+  medium: "768px",
+  small: "450px",
+} as const;
+
 export const theme = {
   colors: {
     brand: "blue",
@@ -23,6 +30,7 @@ export const theme = {
     borderColor: "#2F2F2F",
     text: "#2A2A2A",
     blue: "#3EA6FF",
+    gray: "#C4C4C4",
   },
   fonts: {
     default: "Roboto, sans-serif",
@@ -31,7 +39,7 @@ export const theme = {
   fontWeights: {
     thin: "100",
     regular: "400",
-    bold: "900",
+    bold: "700",
   },
   fontSizes: {
     xxs: "0.625rem",

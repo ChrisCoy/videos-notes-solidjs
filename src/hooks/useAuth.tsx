@@ -1,19 +1,21 @@
 import { Accessor, createContext, createSignal, JSX, Setter, useContext } from "solid-js";
+import { createStore } from "solid-js/store";
 
 interface AuthContextData {
-  isAuth: Accessor<boolean>;
-  setIsAuth?: Setter<boolean>;
+  user?: IUser;
 }
+
+type IUser = {
+  id: string;
+  email?: string;
+} | undefined;
 
 const AuthContext = createContext({} as AuthContextData);
 
 export function AuthProvider(props: { children: JSX.Element }) {
-  console.log({ props });
+  const [user, setUser] = createStore<IUser>(undefined);
 
-  const [isAuth, setIsAuth] = createSignal(true);
-  return (
-    <AuthContext.Provider value={{ isAuth, setIsAuth }}>{props.children}</AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={{user}}>{props.children}</AuthContext.Provider>;
 }
 
 export function useAuth() {

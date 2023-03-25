@@ -1,8 +1,14 @@
 import { styled } from "solid-styled-components";
+import { BREAKPOINTS } from "../../styles/theme";
 
 export const LoginLayoutWrapper = styled.div`
   display: flex;
   height: 100%;
+
+  @media (max-width: ${BREAKPOINTS.small}) {
+    height: 100vh;
+    /* padding: 2rem; */
+  }
 `;
 
 export const Form = styled.div`
@@ -23,6 +29,10 @@ export const Aside = styled.div`
   width: 100%;
   height: 100%;
   /* position: relative; */
+
+  @media (max-width: ${BREAKPOINTS.small}) {
+    display: none;
+  }
 
   background: linear-gradient(
     124deg,
