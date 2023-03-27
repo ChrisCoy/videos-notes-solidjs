@@ -3,7 +3,32 @@ import { styled } from "solid-styled-components";
 
 interface LoadingContextData {
   isLoading: Accessor<boolean>;
-  setIsLoading?: Setter<boolean>;
+  setIsLoading: Setter<boolean>;
+}
+
+const LoadingContext = createContext({} as LoadingContextData);
+
+export function LoadingProvider(props: { children: JSX.Element }) {
+  const [isLoading, setIsLoading] = createSignal(true);
+
+  return (
+    <LoadingContext.Provider value={{ isLoading, setIsLoading }}>
+      {props.children}
+      <LoadingContainer isLoading={isLoading()}>
+        <div class="size-control">
+          <div class="tetromino box1"></div>
+          <div class="tetromino box2"></div>
+          <div class="tetromino box3"></div>
+          <div class="tetromino box4"></div>
+        </div>
+      </LoadingContainer>
+    </LoadingContext.Provider>
+  );
+}
+
+export function useLoading() {
+  const context = useContext(LoadingContext);
+  return context;
 }
 
 const LoadingContainer = styled.div<{ isLoading: boolean }>`
@@ -102,29 +127,3 @@ const LoadingContainer = styled.div<{ isLoading: boolean }>`
     }
   }
 `;
-
-const LoadingContext = createContext({} as LoadingContextData);
-
-export function LoadingProvider(props: { children: JSX.Element }) {
-  console.log({ props });
-
-  const [isLoading, setIsLoading] = createSignal(true);
-  return (
-    <LoadingContext.Provider value={{ isLoading, setIsLoading }}>
-      {props.children}
-      <LoadingContainer isLoading={isLoading()}>
-        <div class="size-control">
-          <div class="tetromino box1"></div>
-          <div class="tetromino box2"></div>
-          <div class="tetromino box3"></div>
-          <div class="tetromino box4"></div>
-        </div>
-      </LoadingContainer>
-    </LoadingContext.Provider>
-  );
-}
-
-export function useLoading() {
-  const context = useContext(LoadingContext);
-  return context;
-}

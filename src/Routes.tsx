@@ -12,21 +12,19 @@ import { SettingsView } from "./views/SettingsView";
 
 export default function Routes() {
   return (
-    <Router source={memoryIntegration()}>
-      <AllRoutes>
-        <Route path={"/account"} element={<LoginLayout />}>
-          <Route path={"/login"} element={<LoginView />} />
-          <Route path={"/register"} element={<RegisterView />} />
-        </Route>
-        <Route path={"/"} element={<AppLayout />}>
-          {/* CHANGE ALL THIS TO PROTECTED ROUTER */}
-          <Route path={"/"} element={<ListNotesView />} />
-          <Route path={"/create"} element={<CreateNoteView />} />
-          <Route path={"/edit"} element={<EditNoteView />} />
-          <Route path={"/:id"} element={<DetailsNoteView />} />
-          <Route path={"/settings"} element={<SettingsView />} />
-        </Route>
-      </AllRoutes>
-    </Router>
+    <AllRoutes>
+      <Route path={"/account"} element={<LoginLayout />}>
+        <Route path={"/login"} element={<LoginView />} />
+        <Route path={"/register"} element={<RegisterView />} />
+      </Route>
+      <Route path={"/"} element={<AppLayout />}>
+        {/* CHANGE ALL THIS TO PROTECTED ROUTER */}
+        <Route path={"/"} element={<ListNotesView />} />
+        <Route path={"/create"} element={<CreateNoteView />} />
+        <Route path={"/edit"} element={<EditNoteView />} />
+        <Route path={"/:id"} element={<DetailsNoteView />} />
+        <Route path={"/settings"} element={<SettingsView />} />
+      </Route>
+    </AllRoutes>
   );
 }

@@ -18,6 +18,8 @@ export const TextArea = styled.textarea`
   color: #2a2a2a;
   font-size: 16px;
 
+  font-family: ${(p) => p.theme?.fonts.default};
+
   &:focus {
     box-shadow: 0px 0px 0px 1px ${(p) => p.theme?.colors.blue} inset;
   }

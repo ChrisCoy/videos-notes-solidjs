@@ -6,18 +6,21 @@ import { AuthProvider } from "./hooks/useAuth";
 import { ToastProvider } from "./hooks/useToast";
 import Routes from "./Routes";
 import { LoadingProvider } from "./hooks/useLoading";
+import { memoryIntegration, Router } from "@solidjs/router";
 
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
-      <LoadingProvider>
-        <AuthProvider>
-          <ToastProvider>
-            <Routes />
-          </ToastProvider>
-          {globalStyle}
-        </AuthProvider>
-      </LoadingProvider>
+      <ToastProvider>
+        <LoadingProvider>
+          <Router source={memoryIntegration()}>
+            <AuthProvider>
+              <Routes />
+              {globalStyle}
+            </AuthProvider>
+          </Router>
+        </LoadingProvider>
+      </ToastProvider>
     </ThemeProvider>
   );
 };

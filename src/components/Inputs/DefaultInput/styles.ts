@@ -21,6 +21,10 @@ export const Wrapper = styled.div`
     cursor: pointer;
   }
 
+  svg{
+    z-index: 1;
+  }
+
   span {
     position: absolute;
     top: 50%;

@@ -7,7 +7,7 @@ interface ListItemProps {
 }
 
 const ListItem: Component<ListItemProps> = (props: ListItemProps) => {
-  function handleClick(){
+  function handleClick() {
     // TODO
   }
   return (
@@ -25,17 +25,19 @@ const ListItem: Component<ListItemProps> = (props: ListItemProps) => {
           </Styles.ButtonsContainer>
         </Styles.TitleContainer>
         <Styles.Description onClick={handleClick}>
-        {/* <Styles.Description onClick={handleClick}> ADD ON MOBILE*/}
+          {/* <Styles.Description onClick={handleClick}> ADD ON MOBILE*/}
           Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
           Ipsum has been the industry's standard dummy...
         </Styles.Description>
-        <Styles.Link
-          href="https://www.youtube.com/watch?v=hvVk6Z6EMU8"
-          target="_blank"
-          tabIndex={1}
-        >
-          https://www.youtube.com/watch?v=hvVk6Z6EMU8
-        </Styles.Link>
+        <div>
+          <Styles.Link
+            href="https://www.youtube.com/watch?v=hvVk6Z6EMU8"
+            target="_blank"
+            tabIndex={1}
+          >
+            https://www.youtube.com/watch?v=hvVk6Z6EMU8
+          </Styles.Link>
+        </div>
       </Styles.ContentContainer>
     </Styles.ListItemWrapper>
   );

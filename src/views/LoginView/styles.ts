@@ -6,7 +6,6 @@ export const LoginFormWrapper = styled.form`
   flex-direction: column;
   gap: ${(p) => p.theme?.sizes[4]};
   width: 100%;
-  padding-inline: ${(p) => p.theme?.sizes[16]};
 
   @media (max-width: ${BREAKPOINTS.small}) {
     padding: 1rem;

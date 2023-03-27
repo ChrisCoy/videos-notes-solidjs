@@ -1,5 +1,5 @@
 import { useNavigate } from "@solidjs/router";
-import { Component } from "solid-js";
+import { Component, JSX } from "solid-js";
 import * as Styles from "./styles";
 import { AiOutlineLogin as LoginIcon } from "solid-icons/ai";
 import { LoginLayout } from "../../layouts/LoginLayout";
@@ -11,27 +11,38 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../service/firebase";
 import Button from "../../components/Button";
 import { Or } from "../../components/Or";
+import { useAuth } from "../../hooks/useAuth";
 
 interface LoginViewProps {}
 
 const LoginView: Component = ({}: LoginViewProps) => {
   const toast = useToast();
   const navigate = useNavigate();
+  const { login } = useAuth();
 
-  function handleOnLogin(e: Event) {
-    e.preventDefault();
-    navigate("/");
-    // const data = new FormData(e.target as HTMLFormElement);
-    // console.log(data.get("Email"));
-    // signInWithEmailAndPassword(auth, "", "") //credentials here
-    //   .then((userCredential) => {
-    //     const user = userCredential.user;
-    //     console.log(user);
-    //     // ...
-    //   })
-    //   .catch((error) => {
-    //     toast.error(error.message);
-    //   });
+  async function handleOnLogin(e: SubmitEvent) {
+    try {
+      e.preventDefault();
+
+      const data = new FormData(e.target as HTMLFormElement);
+
+      const email = data.get("email") || "";
+      const password = data.get("password") || "";
+
+      if (email.length < 10) {
+        toast.error("Invalid email!");
+        return;
+      }
+
+      if (password.length < 6) {
+        toast.error("Password must have at least 6 characters!");
+        return;
+      }
+
+      login({ email: email.toString(), password: password.toString() });
+    } catch (error) {
+      toast.error("Error");
+    }
   }
 
   function handleOnSignUp() {
@@ -47,12 +58,14 @@ const LoginView: Component = ({}: LoginViewProps) => {
       <Styles.LoginFormWrapper onsubmit={handleOnLogin}>
         <DefaultInput
           inputLabel="Email"
+          idAndName="email"
           icon={<AiOutlineMail />}
           placeholder="email@provider.com"
         />
         <DefaultInput
           inputLabel="Password"
           type="password"
+          idAndName="password"
           placeholder="*********"
           icon={<RiSystemLockPasswordLine />}
         />

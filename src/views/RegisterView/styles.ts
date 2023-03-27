@@ -1,5 +1,6 @@
 import { styled } from "solid-styled-components";
-import { theme } from "../../styles/theme";
+import { BREAKPOINTS, theme } from "../../styles/theme";
+import { CgChevronLeftO } from "solid-icons/cg";
 
 export const LoginViewContainer = styled.div`
   display: flex;
@@ -19,17 +20,32 @@ export const LoginViewContainer = styled.div`
   }
 `;
 
+export const BackIcon = styled(CgChevronLeftO)`
+  position: absolute;
+  top: 0.8rem;
+  left: 1rem;
+  cursor: pointer;
+  transition: all ${(p) => p.theme?.transitions.default};
+
+  &:hover{
+    color: ${(p) => p.theme?.colors.blue} !important;
+  }
+`;
+
 export const Title = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
   justify-content: center;
-`
+`;
 
 export const LoginFormWrapper = styled.form`
   display: flex;
   flex-direction: column;
   gap: ${(p) => p.theme?.sizes[4]};
   width: 100%;
-  padding-inline: ${(p) => p.theme?.sizes[16]};
+
+  @media (max-width: ${BREAKPOINTS.small}) {
+    padding: 1rem;
+  }
 `;

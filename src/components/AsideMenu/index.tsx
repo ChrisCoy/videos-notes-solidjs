@@ -15,8 +15,6 @@ const AsideMenu: Component<AsideMenuProps> = (props: AsideMenuProps) => {
 
   const toast = useToast();
 
-  console.log(nav);
-
   return (
     <Styles.AsideMenuWrapper class={props.class}>
       <Styles.Item
