@@ -22,12 +22,6 @@ export const globalStyle = createGlobalStyles`
     z-index: 1;
   }
 
-  /* body, #root {
-    height: 100%;
-
-  } */
-
-
   #root{
     position: relative;
     background: ${theme.colors.bg};

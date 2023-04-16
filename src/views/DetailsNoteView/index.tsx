@@ -1,28 +1,49 @@
-import { Component } from "solid-js";
+import { Component, Show } from "solid-js";
 import * as Styles from "./styles";
 import { AiOutlineClockCircle as ClockIcon } from "solid-icons/ai";
-import TextArea from "../../components/Inputs/TextArea";
+import { TextArea } from "../../components/Inputs/TextArea";
 import Button from "../../components/Button";
-import { useNavigate } from "@solidjs/router";
+import { useLocation, useNavigate, useParams } from "@solidjs/router";
+import useVideos from "../../hooks/useVideos";
+import { useToast } from "../../hooks/useToast";
 
 const DetailsNoteView: Component = () => {
   const navigate = useNavigate();
+  const { convertTime } = useVideos();
+  // const location = useLocation();
+  const params = useParams();
+  const toast = useToast();
+  const { getNoteById } = useVideos();
+  const note = getNoteById(params.id);
+
+  if (!note) {
+    toast.error("Note not found");
+    navigate("/");
+  }
+
+  console.log(note);
+
+  function handleToVideo(id: string) {}
 
   return (
     <Styles.DetailsNoteViewWrapper>
       <Styles.TitleContainer>
-        <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h1>
-        <Styles.Timer>
-          <ClockIcon size={28} />
-          <span>2:33</span>
-        </Styles.Timer>
+        <h1>{note?.title}</h1>
+        <Show when={note?.time}>
+          <Styles.Timer>
+            <ClockIcon size={28} />
+            <span>{convertTime(note?.time)}</span>
+          </Styles.Timer>
+        </Show>
       </Styles.TitleContainer>
-      <TextArea />
+      <TextArea value={note?.text} disabled />
       <Styles.ButtonsContainer>
         <Button noButton style={{ height: "36px" }} onClick={() => navigate("/")}>
-          CANCEL
+          BACK
         </Button>
-        <Button style={{ height: "36px" }}>SAVE</Button>
+        <Button style={{ height: "36px" }} onClick={() => handleToVideo(note?.id!)}>
+          GO TO VIDEO
+        </Button>
       </Styles.ButtonsContainer>
     </Styles.DetailsNoteViewWrapper>
   );

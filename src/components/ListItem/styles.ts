@@ -30,7 +30,7 @@ export const ListItemWrapper = styled.div`
 export const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   /* gap: 0.2rem; */
   width: 100%;
 `;

@@ -20,6 +20,13 @@ export const TextArea = styled.textarea`
 
   font-family: ${(p) => p.theme?.fonts.default};
 
+  &:where(:disabled) {
+    /* opacity: 0.8; */
+    background: #333;
+    color: #fff;
+    border: #4a4a4a 1px solid;
+  }
+
   &:focus {
     box-shadow: 0px 0px 0px 1px ${(p) => p.theme?.colors.blue} inset;
   }

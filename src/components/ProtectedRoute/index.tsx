@@ -8,14 +8,14 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute: Component<ProtectedRouteProps> = (props: ProtectedRouteProps) => {
-  const { isAuth } = useAuth();
+  const { user } = useAuth();
 
   return (
     <Route
       {...props}
       path={props.path}
       element={() => {
-        if (isAuth()) return props.element;
+        if (user?.id) return props.element;
         else return <Navigate href={"/"} />;
       }}
     />

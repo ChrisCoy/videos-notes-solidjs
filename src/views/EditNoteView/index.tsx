@@ -1,7 +1,7 @@
 import { Component, JSX } from "solid-js";
 import * as Styles from "./styles";
 import { AiOutlineClockCircle as ClockIcon } from "solid-icons/ai";
-import TextArea from "../../components/Inputs/TextArea";
+import { TextArea } from "../../components/Inputs/TextArea";
 import Button from "../../components/Button";
 import { useNavigate } from "@solidjs/router";
 

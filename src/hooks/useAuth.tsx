@@ -6,7 +6,15 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import { Accessor, createContext, createSignal, JSX, Setter, useContext } from "solid-js";
+import {
+  Accessor,
+  createContext,
+  createEffect,
+  createSignal,
+  JSX,
+  Setter,
+  useContext,
+} from "solid-js";
 import { createStore } from "solid-js/store";
 import { auth } from "../service/firebase";
 import { useLoading } from "./useLoading";
@@ -97,9 +105,9 @@ export function AuthProvider(props: { children: JSX.Element }) {
       });
       navigate("/");
     } else {
+      setIsLoading(false);
       navigate("/account/login");
     }
-    setIsLoading(false);
   });
 
   return (

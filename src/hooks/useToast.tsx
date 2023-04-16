@@ -15,6 +15,8 @@ const ToastContainer = styled.div`
   gap: 0.5rem;
   padding: 1rem;
   z-index: 9999999;
+  max-height: 369px;
+  overflow-y: hidden;
   /* background: red; */
 `;
 

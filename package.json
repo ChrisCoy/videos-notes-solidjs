@@ -24,6 +24,7 @@
     "firebase": "^9.18.0",
     "solid-icons": "^1.0.4",
     "solid-js": "^1.6.10",
-    "solid-styled-components": "^0.28.5"
+    "solid-styled-components": "^0.28.5",
+    "sweetalert2": "^11.7.3"
   }
 }
