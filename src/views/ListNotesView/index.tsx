@@ -1,19 +1,22 @@
-import { Component, For, JSX, createEffect, onMount } from "solid-js";
+import { Component, For, Show } from "solid-js";
 import { ListItem } from "../../components/ListItem";
 import * as Styles from "./styles";
-import { createStore } from "solid-js/store";
-import useVideos, { NoteData } from "../../hooks/useVideos";
+
+import useVideos from "../../hooks/useVideos";
 import { useLoading } from "../../hooks/useLoading";
-import { useAuth } from "../../hooks/useAuth";
 
 const ListNotesView: Component = () => {
-  // const [notesList, setNotesList] = createStore<NoteData[]>([]);
   const { notes } = useVideos();
-  const { setIsLoading } = useLoading();
+  const { isLoading } = useLoading();
 
   return (
     <Styles.ListNotesViewWrapper>
       <For each={notes()}>{(note) => <ListItem note={note} />}</For>
+      <Show when={notes()?.length === 0 && !isLoading()}>
+        <p>
+          No annotation was created. Click on the first button in the side menu to crate one.
+        </p>
+      </Show>
     </Styles.ListNotesViewWrapper>
   );
 };

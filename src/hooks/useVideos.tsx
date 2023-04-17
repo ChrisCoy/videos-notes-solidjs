@@ -9,6 +9,8 @@ import {
   getDocs,
   orderBy,
   query,
+  setDoc,
+  updateDoc,
   where,
 } from "firebase/firestore";
 import { useToast } from "./useToast";
@@ -18,23 +20,24 @@ import {
   JSX,
   Resource,
   createContext,
-  createEffect,
   createResource,
+  createEffect,
   createSignal,
   useContext,
 } from "solid-js";
 import { SetStoreFunction, createStore } from "solid-js/store";
-
+import rasterizeHtml from "rasterizehtml";
 export interface VideoData {
   title: string;
   thumbnail?: string;
   time?: number;
-  url: string;
+  url?: string;
 }
 
 export interface NoteData extends VideoData {
   id?: string;
   text: string;
+  createdAt?: string;
 }
 
 interface VideosContextData {
@@ -42,10 +45,11 @@ interface VideosContextData {
   setNotes: SetStoreFunction<NoteData[]>;
   getVideoInfoFromTab: () => Promise<VideoData>;
   convertTime: (time?: number) => string | undefined;
-  saveNote: (note: NoteData) => void;
+  saveNote: (note: NoteData) => Promise<void>;
   refetch: (info?: unknown) => NoteData[] | Promise<NoteData[] | undefined> | null | undefined;
   deleteNote: (id: string) => void;
   getNoteById: (id: string) => NoteData | undefined;
+  updateNote: (note: NoteData) => void;
 }
 
 const VideosContext = createContext({} as VideosContextData);
@@ -78,9 +82,19 @@ export function VideosProvider(props: { children: JSX.Element }) {
   async function saveNote(note: NoteData) {
     try {
       if (!user?.id) return;
+
+      console.log(note);
+
+      if (note.text.length < 1) {
+        throw new Error("Note cannot be empty");
+      }
+
       setIsLoading(true);
       await addDoc(ref, {
-        ...note,
+        ...(note.thumbnail && note.time && { time: note.time, thumbnail: note.thumbnail }),
+        title: note.title,
+        url: note.url,
+        text: note.text,
         userId: user?.id || "",
         createdAt: new Date(),
       });
@@ -90,13 +104,15 @@ export function VideosProvider(props: { children: JSX.Element }) {
       // setNotes((prevNotes) => [...(prevNotes || []), itemToAdd]);
 
       toast.info("Note saved!");
-    } catch (error) {
-      if (error instanceof FirestoreError) {
-        toast.error(error.code);
-      }
-    } finally {
       navigate("/");
       setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+      if (error instanceof FirestoreError) {
+        toast.error(error.code);
+      } else {
+        throw error;
+      }
     }
   }
 
@@ -115,10 +131,12 @@ export function VideosProvider(props: { children: JSX.Element }) {
 
         if (video) {
           const canvas = document.createElement("canvas");
-          canvas.width = 90;
+          const aspectRatio = video.videoWidth / video.videoHeight;
+
+          canvas.width = 90 * aspectRatio;
           canvas.height = 90;
           const canvasContext = canvas.getContext("2d");
-          canvasContext?.drawImage(video, 0, 0, 90, 90);
+          canvasContext?.drawImage(video, 0, 0, 90 * aspectRatio, 90);
           thumbnail = canvas.toDataURL("image/png");
         }
 
@@ -157,24 +175,38 @@ export function VideosProvider(props: { children: JSX.Element }) {
   }
 
   async function deleteNote(id: string) {
-    toast.info(id);
-    //const noteToDelette = collection(db, "notes.id", id);
-
-    // console.log(noteToDelette);
-
+    setIsLoading(true);
     console.log(doc(db, "notes", id));
 
     const refNote = doc(db, "notes", id);
 
     await deleteDoc(refNote);
 
-    //await deleteDoc(doc(db, "notes", id));
+    refetch();
+  }
+
+  async function updateNote(note: NoteData) {
+    if (!note) {
+      toast.error("Note not found");
+      return;
+    }
+
+    setIsLoading(true);
+
+    const noteRef = doc(db, "notes", note.id!);
+
+    await updateDoc(noteRef, {
+      text: note.text,
+      title: note.title,
+    });
+    navigate("/");
     refetch();
   }
 
   return (
     <VideosContext.Provider
       value={{
+        updateNote,
         notes,
         getNoteById,
         setNotes,

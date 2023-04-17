@@ -11,7 +11,9 @@ export const DetailsNoteViewWrapper = styled.div`
 
 export const TitleContainer = styled.div`
   display: flex;
+  width: 100%;
   align-items: center;
+  justify-content: space-between;
   gap: 1rem;
   padding-bottom: 0.5rem;
 

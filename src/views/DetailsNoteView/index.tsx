@@ -23,7 +23,10 @@ const DetailsNoteView: Component = () => {
 
   console.log(note);
 
-  function handleToVideo(id: string) {}
+  function handleToVideo(id: string) {
+    alert("rodei");
+    // TODO - implementar a funcionalidade de ir para o video
+  }
 
   return (
     <Styles.DetailsNoteViewWrapper>

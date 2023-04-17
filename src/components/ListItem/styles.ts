@@ -14,9 +14,9 @@ export const ListItemWrapper = styled.div`
     border-radius: 5px;
     border: 2px solid ${(p) => p.theme?.colors.borderColor};
 
-    @media(max-width:${BREAKPOINTS.small}){
-        display: none;
-        /* max-width: 70px; */
+    @media (max-width: ${BREAKPOINTS.small}) {
+      display: none;
+      /* max-width: 70px; */
     }
   }
 
@@ -31,6 +31,7 @@ export const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  overflow: hidden;
   /* gap: 0.2rem; */
   width: 100%;
 `;
@@ -44,8 +45,7 @@ export const TitleContainer = styled.div`
 `;
 
 export const Title = styled.div`
-  /* display: flex;
-  width: 100%; */
+  width: 100%;
   display: grid;
   grid-template-columns: 5fr 1fr;
   gap: 0.2rem;
@@ -58,6 +58,13 @@ export const Title = styled.div`
     font-weight: ${(p) => p.theme?.fontWeights.bold};
     transition: color ${(p) => p.theme?.transitions.default};
     font-size: 1.2rem;
+
+    &:focus-visible {
+      outline: none !important;
+      box-shadow: inset 0px 0px 0px 2px #aaa !important;
+      z-index: 1 !important;
+      color: ${(p) => p.theme?.colors.blue};
+    }
 
     &:hover {
       cursor: pointer;
@@ -83,6 +90,16 @@ export const ButtonsContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
+
+  button {
+    all: unset;
+    &:focus-visible {
+      outline: none !important;
+      box-shadow: inset 0px 0px 0px 2px #aaa !important;
+      z-index: 1 !important;
+      /* color: ${(p) => p.theme?.colors.blue}; */
+    }
+  }
 
   svg {
     transition: all 0.3s ${(p) => p.theme?.transitions.bounce};
@@ -117,5 +134,21 @@ export const Link = styled.a`
 
   &:hover {
     filter: brightness(1.4);
+  }
+`;
+
+export const FallBackImage = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90px;
+  height: 90px;
+  aspect-ratio: 1/1;
+  background: #222;
+
+  border: 2px solid ${(p) => p.theme?.colors.borderColor};
+  border-radius: 5px;
+  svg {
+    font-size: 3rem;
   }
 `;

@@ -18,7 +18,7 @@ export const globalStyle = createGlobalStyles`
 
   *:focus-visible{
     outline: none;
-    box-shadow: 0px 0px 5px  #aaa;
+    box-shadow: inset 0px 0px 0px 2px #aaa;
     z-index: 1;
   }
 

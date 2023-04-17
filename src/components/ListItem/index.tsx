@@ -1,6 +1,10 @@
 import { Component, JSX, Show } from "solid-js";
 import * as Styles from "./styles";
-import { FaSolidPen as PenIcon, FaSolidTrash as TrashIcon } from "solid-icons/fa";
+import {
+  FaRegularImage,
+  FaSolidPen as PenIcon,
+  FaSolidTrash as TrashIcon,
+} from "solid-icons/fa";
 import useVideos, { NoteData } from "../../hooks/useVideos";
 import Swal from "sweetalert2";
 import { useToast } from "../../hooks/useToast";
@@ -25,7 +29,10 @@ const ListItem: Component<ListItemProps> = (props: ListItemProps) => {
 
   function handleSeeNote(id: string) {
     navigate("/" + id);
-    // TODO
+  }
+
+  function handleEditClick(id: string) {
+    navigate("/edit/" + id);
   }
 
   async function handleDeleteClick(id: string) {
@@ -46,19 +53,44 @@ const ListItem: Component<ListItemProps> = (props: ListItemProps) => {
   }
 
   return (
-    <Styles.ListItemWrapper class={props.class} tabIndex={0}>
-      <img src={props.note.thumbnail} />
+    <Styles.ListItemWrapper class={props.class} tabIndex={-1}>
+      <Show
+        when={props.note.thumbnail}
+        fallback={
+          <Styles.FallBackImage>
+            <FaRegularImage />
+          </Styles.FallBackImage>
+        }
+      >
+        <img src={props.note.thumbnail} />
+      </Show>
       <Styles.ContentContainer>
         <Styles.TitleContainer>
           <Styles.Title>
-            <h2 onClick={() => handleSeeNote(props.note.id!)}>{props.note.title}</h2>
+            <h2
+              role="button"
+              onkeypress={(e) => {
+                if (e.key === "Enter") {
+                  handleSeeNote(props.note.id!);
+                }
+              }}
+              onClick={() => handleSeeNote(props.note.id!)}
+              tabIndex={1}
+            >
+              {props.note.title}
+            </h2>
             <Show when={props.note.time}>
               <span>{convertTime(props.note.time)}</span>
             </Show>
           </Styles.Title>
           <Styles.ButtonsContainer>
-            <PenIcon size={20} />
-            <TrashIcon size={20} onClick={() => handleDeleteClick(props.note.id!)} />
+            <button tabIndex={1} onClick={() => handleEditClick(props.note.id!)}>
+              <PenIcon size={20} />
+            </button>
+
+            <button tabIndex={1} onClick={() => handleDeleteClick(props.note.id!)}>
+              <TrashIcon size={20} />
+            </button>
           </Styles.ButtonsContainer>
         </Styles.TitleContainer>
         <Styles.Description>{props.note.text}</Styles.Description>

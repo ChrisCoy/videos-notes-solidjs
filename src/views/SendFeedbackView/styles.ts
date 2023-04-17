@@ -1,6 +1,6 @@
 import { styled } from "solid-styled-components";
 
-export const CreateNoteWrapper = styled.div`
+export const SendFeedbackWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,16 +9,7 @@ export const CreateNoteWrapper = styled.div`
   height: 100%;
 `;
 
-export const TitleContainer = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  padding-bottom: 0.5rem;
 
-  border-bottom: 1px solid ${(p) => p.theme?.colors.borderColor};
-`;
 
 export const Timer = styled.div`
   display: flex;

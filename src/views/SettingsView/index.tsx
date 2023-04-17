@@ -3,25 +3,129 @@ import { Component, JSX } from "solid-js";
 import { useAuth } from "../../hooks/useAuth";
 import * as Styles from "./styles";
 import useVideos from "../../hooks/useVideos";
-import Swal from "sweetalert2";
+import { FiLogOut } from "solid-icons/fi";
+import { TbFileExport } from "solid-icons/tb";
+import { BiRegularImport } from "solid-icons/bi";
+import { AiFillGithub } from "solid-icons/ai";
+import { AiFillHeart } from "solid-icons/ai";
+import { VsFeedback } from "solid-icons/vs";
+import { useToast } from "../../hooks/useToast";
+import { useLoading } from "../../hooks/useLoading";
+
 
 const SettingsView: Component = () => {
   const navigate = useNavigate();
   const { logout } = useAuth();
-  const { getVideoInfoFromTab } = useVideos();
+  const { getVideoInfoFromTab, notes } = useVideos();
+  const toast = useToast();
+  const { setIsLoading } = useLoading();
 
-  async function teste() {
+  async function handleDownloadNotes() {
+    const download = document.createElement("a");
+    const notesToDownload = notes()?.map((note) => ({
+      text: note.text,
+      time: note.time,
+      title: note.title,
+      url: note.url,
+      thumbnail: note.thumbnail,
+      createdAt: note.createdAt,
+    }));
+    var dataStr =
+      "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(notesToDownload));
+    download.setAttribute("href", dataStr);
+    download.setAttribute("download", "notes.json");
+    download.click();
 
+    download.remove();
+  }
 
-    // console.log("result", result);
+  function handleImportNotes(event: any) {
+    try {
+      const file = event?.currentTarget.files[0];
+      if (!file) return;
+      setIsLoading(true);
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        try {
+          const notesFromFile = JSON.parse(e.target?.result as string);
+          notesFromFile.forEach((note: any) => {
+            Object.keys(note).forEach((key) => {
+              if (["title", "thumbnail", "time", "url", "text", "createdAt"].includes(key)) {
+                return;
+              }
+              throw new Error("Invalid note format");
+            });
 
-    // console.log(await getVideoInfoFromTab());
+            // TODO save all notes using batch
+
+            // let batch = batch
+          });
+          console.log(notesFromFile);
+          event!.target!.value = "";
+        } catch (error) {
+          console.log(error);
+
+          toast.error("Invalid file format");
+        } finally {
+          setIsLoading(false);
+        }
+      };
+      reader.readAsText(file);
+    } catch (error) {
+      toast.error("Invalid file format");
+    }
+  }
+
+  // const handleImportNotes:JSX.EventHandler<HTMLInputElement, > = (event)=>{
+  //   const file = event.target.files[0];
+  //   const reader = new FileReader();
+  //   reader.onload = (e) => {
+  //     const notes = JSON.parse(e.target.result as string);
+  //     console.log(notes);
+  //   };
+  //   reader.readAsText(file);
+  // }
+
+  function handleSendFeedback() {
+    // alert("Not implemented yet");
+    navigate("/send-feedback");
   }
 
   return (
     <Styles.SettingsViewWrapper>
-      <button onClick={logout}>Log out</button>
-      <button onClick={teste}>Teste</button>
+      <Styles.MenuWrapper>
+        <Styles.MenuItem onClick={handleDownloadNotes}>
+          <TbFileExport />
+          Export Notes
+        </Styles.MenuItem>
+        <Styles.SendFileButton>
+          <input type="file" accept="application/JSON" onChange={handleImportNotes} />
+          <BiRegularImport />
+          Import notes
+        </Styles.SendFileButton>
+        <a
+          href="https://github.com/ChrisCoy/videos-notes-solidjs"
+          target="_blank"
+          style={{ all: "unset" }}
+        >
+          <Styles.MenuItem tabIndex={-1}>
+            <AiFillGithub />
+            GitHub repository
+          </Styles.MenuItem>
+        </a>
+        <Styles.MenuItem onClick={handleSendFeedback}>
+          <VsFeedback /> Give feedback
+        </Styles.MenuItem>
+        <Styles.MenuItem onClick={logout}>
+          <FiLogOut /> Log out
+        </Styles.MenuItem>
+        <Styles.MadeWithLove>
+          Made with <AiFillHeart /> by
+          <a href="https://github.com/ChrisCoy" target="_blank">
+            Chris Coy
+          </a>
+        </Styles.MadeWithLove>
+      </Styles.MenuWrapper>
     </Styles.SettingsViewWrapper>
   );
 };

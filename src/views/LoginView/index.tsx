@@ -1,14 +1,11 @@
 import { useNavigate } from "@solidjs/router";
-import { Component, JSX } from "solid-js";
+import { Component } from "solid-js";
 import * as Styles from "./styles";
 import { AiOutlineLogin as LoginIcon } from "solid-icons/ai";
-import { LoginLayout } from "../../layouts/LoginLayout";
 import { DefaultInput } from "../../components/Inputs/DefaultInput";
 import { AiOutlineMail } from "solid-icons/ai";
 import { RiSystemLockPasswordLine } from "solid-icons/ri";
 import { useToast } from "../../hooks/useToast";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../service/firebase";
 import Button from "../../components/Button";
 import { Or } from "../../components/Or";
 import { useAuth } from "../../hooks/useAuth";

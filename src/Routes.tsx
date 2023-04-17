@@ -9,6 +9,7 @@ import { ListNotesView } from "./views/ListNotesView";
 import { LoginView } from "./views/LoginView";
 import { RegisterView } from "./views/RegisterView";
 import { SettingsView } from "./views/SettingsView";
+import { SendFeedbackView } from "./views/SendFeedbackView";
 
 export default function Routes() {
   return (
@@ -19,9 +20,10 @@ export default function Routes() {
       </Route>
       <Route path={"/"} element={<AppLayout />}>
         {/* CHANGE ALL THIS TO PROTECTED ROUTER */}
+        <Route path={"/send-feedback"} element={<SendFeedbackView />} />
         <Route path={"/"} element={<ListNotesView />} />
         <Route path={"/create"} element={<CreateNoteView />} />
-        <Route path={"/edit"} element={<EditNoteView />} />
+        <Route path={"/edit/:id"} element={<EditNoteView />} />
         <Route path={"/:id"} element={<DetailsNoteView />} />
         <Route path={"/settings"} element={<SettingsView />} />
       </Route>

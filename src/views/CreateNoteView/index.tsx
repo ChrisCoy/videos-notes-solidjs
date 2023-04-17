@@ -8,8 +8,10 @@ import { createSignal } from "solid-js";
 import { useNavigate } from "@solidjs/router";
 import useVideos, { VideoData } from "../../hooks/useVideos";
 import { createStore } from "solid-js/store";
+import { useToast } from "../../hooks/useToast";
 
 const CreateNoteView: Component = () => {
+  const toast = useToast();
   const [title, setTitle] = createSignal("");
   const [noteText, setNoteText] = createSignal("");
   const [videoData, setVideoData] = createStore<VideoData>({} as VideoData);
@@ -25,14 +27,18 @@ const CreateNoteView: Component = () => {
     setTitle(videoInfo.title);
   });
 
-  function handleSaveNote() {
-    saveNote({
-      text: noteText(),
-      title: title(),
-      time: videoData.time,
-      url: videoData.url,
-      thumbnail: videoData.thumbnail,
-    });
+  async function handleSaveNote() {
+    try {
+      await saveNote({
+        text: noteText(),
+        title: title(),
+        time: videoData.time,
+        url: videoData.url,
+        thumbnail: videoData.thumbnail,
+      });
+    } catch (error) {
+      toast.error("Note cannot be empty");
+    }
   }
 
   return (
