@@ -11,12 +11,12 @@ import { AiFillHeart } from "solid-icons/ai";
 import { VsFeedback } from "solid-icons/vs";
 import { useToast } from "../../hooks/useToast";
 import { useLoading } from "../../hooks/useLoading";
-
+import Swal from "sweetalert2";
 
 const SettingsView: Component = () => {
   const navigate = useNavigate();
   const { logout } = useAuth();
-  const { getVideoInfoFromTab, notes } = useVideos();
+  const { getVideoInfoFromTab, notes, createManyNotes } = useVideos();
   const toast = useToast();
   const { setIsLoading } = useLoading();
 
@@ -39,10 +39,25 @@ const SettingsView: Component = () => {
     download.remove();
   }
 
-  function handleImportNotes(event: any) {
+  async function handleImportNotes(event: any) {
     try {
       const file = event?.currentTarget.files[0];
       if (!file) return;
+
+      const result = await Swal.fire({
+        title: `You are about to import ${file.name}, are you sure?`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes",
+      });
+  
+      if (!result.isConfirmed) {
+        event!.target!.value = "";
+        return;
+      }
+
       setIsLoading(true);
       const reader = new FileReader();
       reader.onload = async (e) => {
@@ -55,11 +70,10 @@ const SettingsView: Component = () => {
               }
               throw new Error("Invalid note format");
             });
-
-            // TODO save all notes using batch
-
-            // let batch = batch
           });
+
+          createManyNotes(notesFromFile);
+
           console.log(notesFromFile);
           event!.target!.value = "";
         } catch (error) {
@@ -72,6 +86,7 @@ const SettingsView: Component = () => {
       };
       reader.readAsText(file);
     } catch (error) {
+      
       toast.error("Invalid file format");
     }
   }

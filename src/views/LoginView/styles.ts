@@ -37,3 +37,25 @@ export const Title = styled.div`
   gap: 1rem;
   justify-content: center;
 `;
+
+export const ForgetPassword = styled.button`
+  /* all: unset; */
+  background: none;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 0.8rem;
+  text-align: end;
+  margin-top: -0.7rem;
+  font-weight: 400;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+    color: ${(p) => p.theme?.colors.blue};
+    transition: all 0.2s;
+  }
+
+  /* color: ${(p) => p.theme?.colors.blue}; */
+  /* font-weight: ${(p) => p.theme?.fontWeights.bold}; */
+`;

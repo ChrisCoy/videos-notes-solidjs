@@ -11,9 +11,9 @@ export default defineConfig({
     port: 3000,
   },
   publicDir: publicDir,
-
   build: {
     outDir: outDir,
+    minify: true,
     sourcemap: true,
     rollupOptions: {
       input: {

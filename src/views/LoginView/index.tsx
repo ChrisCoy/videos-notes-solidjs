@@ -46,6 +46,12 @@ const LoginView: Component = ({}: LoginViewProps) => {
     navigate("/account/register");
   }
 
+  // function resetPassword(){
+  //   //function to reset firebase password
+        // firebase.auth().sendPasswordResetEmail(email).then(function() { })
+        // TODO - implement reset password
+  // }
+
   return (
     <Styles.LoginViewContainer>
       <Styles.Title>
@@ -66,6 +72,9 @@ const LoginView: Component = ({}: LoginViewProps) => {
           placeholder="*********"
           icon={<RiSystemLockPasswordLine />}
         />
+        <Styles.ForgetPassword tabIndex={0} onClick={() => alert("te")}>
+          forget password?
+        </Styles.ForgetPassword>
         <Button type="submit">Sign In</Button>
         <Or />
         <Button onClick={handleOnSignUp} noButton type="button">

@@ -10,7 +10,7 @@
     "default_icon": "icon.png"
   },
   "host_permissions": ["<all_urls>"],
-  "permissions": ["scripting", "activeTab"],
+  "permissions": ["scripting", "activeTab", "storage"],
   "icons": {
     "16": "icon.png",
     "48": "icon.png",

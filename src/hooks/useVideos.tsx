@@ -12,6 +12,7 @@ import {
   setDoc,
   updateDoc,
   where,
+  writeBatch,
 } from "firebase/firestore";
 import { useToast } from "./useToast";
 import { useAuth } from "./useAuth";
@@ -50,6 +51,7 @@ interface VideosContextData {
   deleteNote: (id: string) => void;
   getNoteById: (id: string) => NoteData | undefined;
   updateNote: (note: NoteData) => void;
+  createManyNotes: (notes: NoteData[]) => Promise<void>;
 }
 
 const VideosContext = createContext({} as VideosContextData);
@@ -176,7 +178,6 @@ export function VideosProvider(props: { children: JSX.Element }) {
 
   async function deleteNote(id: string) {
     setIsLoading(true);
-    console.log(doc(db, "notes", id));
 
     const refNote = doc(db, "notes", id);
 
@@ -203,6 +204,28 @@ export function VideosProvider(props: { children: JSX.Element }) {
     refetch();
   }
 
+  async function createManyNotes(notes: NoteData[]) {
+    setIsLoading(true);
+    console.log({ notes });
+
+    const notesToSave = notes.map((note) => ({
+      ...note,
+      userId: user?.id || "",
+      createdAt: new Date(),
+    }));
+
+    const batch = writeBatch(db);
+
+    notesToSave.forEach((note) => {
+      const docRef = doc(collection(db, "notes"));
+      batch.set(docRef, note);
+    });
+
+    await batch.commit();
+    setIsLoading(false);
+    refetch();
+  }
+
   return (
     <VideosContext.Provider
       value={{
@@ -215,6 +238,7 @@ export function VideosProvider(props: { children: JSX.Element }) {
         saveNote,
         refetch,
         deleteNote,
+        createManyNotes,
       }}
     >
       {props.children}
