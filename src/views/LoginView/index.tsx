@@ -9,13 +9,16 @@ import { useToast } from "../../hooks/useToast";
 import Button from "../../components/Button";
 import { Or } from "../../components/Or";
 import { useAuth } from "../../hooks/useAuth";
+import { sendPasswordResetEmail } from "firebase/auth";
+import { auth } from "../../service/firebase";
+import { FirebaseError } from "firebase/app";
 
 interface LoginViewProps {}
 
 const LoginView: Component = ({}: LoginViewProps) => {
   const toast = useToast();
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, user } = useAuth();
 
   async function handleOnLogin(e: SubmitEvent) {
     try {
@@ -46,12 +49,6 @@ const LoginView: Component = ({}: LoginViewProps) => {
     navigate("/account/register");
   }
 
-  // function resetPassword(){
-  //   //function to reset firebase password
-        // firebase.auth().sendPasswordResetEmail(email).then(function() { })
-        // TODO - implement reset password
-  // }
-
   return (
     <Styles.LoginViewContainer>
       <Styles.Title>
@@ -62,6 +59,8 @@ const LoginView: Component = ({}: LoginViewProps) => {
         <DefaultInput
           inputLabel="Email"
           idAndName="email"
+          type="email"
+          required
           icon={<AiOutlineMail />}
           placeholder="email@provider.com"
         />
@@ -69,10 +68,11 @@ const LoginView: Component = ({}: LoginViewProps) => {
           inputLabel="Password"
           type="password"
           idAndName="password"
+          required
           placeholder="*********"
           icon={<RiSystemLockPasswordLine />}
         />
-        <Styles.ForgetPassword tabIndex={0} onClick={() => alert("te")}>
+        <Styles.ForgetPassword type="button" tabIndex={0} onClick={() => navigate("/account/resetpw")}>
           forget password?
         </Styles.ForgetPassword>
         <Button type="submit">Sign In</Button>

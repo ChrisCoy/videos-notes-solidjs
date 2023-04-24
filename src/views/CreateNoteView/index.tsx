@@ -22,9 +22,14 @@ const CreateNoteView: Component = () => {
 
   onMount(async () => {
     titleRef?.focus();
-    const videoInfo = await getVideoInfoFromTab();
-    setVideoData(videoInfo);
-    setTitle(videoInfo.title);
+    try {
+      const videoInfo = await getVideoInfoFromTab();
+      setVideoData(videoInfo);
+      setTitle(videoInfo.title);
+    } catch (error) {
+      toast.error("Cannot create note from this page");
+      navigate("/");
+    }
   });
 
   async function handleSaveNote() {

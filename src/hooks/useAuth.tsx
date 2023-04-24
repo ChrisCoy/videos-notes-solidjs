@@ -52,7 +52,6 @@ export function AuthProvider(props: { children: JSX.Element }) {
         email: user.email || "",
         id: user.uid,
       });
-      console.log(user);
     } catch (error) {
       console.error(error);
       toast.error("Error, please try again");
@@ -72,7 +71,6 @@ export function AuthProvider(props: { children: JSX.Element }) {
         id: user.uid,
       });
     } catch (error) {
-      console.error(error instanceof FirebaseError);
       if (error instanceof FirebaseError) {
         toast.error(error.code);
         console.log({ error });

@@ -10,7 +10,7 @@ interface LoginLayoutProps {
 const LoginLayout: Component<LoginLayoutProps> = (props: LoginLayoutProps) => {
   return (
     <Styles.LoginLayoutWrapper class={props.class}>
-      <Styles.Form>
+      <Styles.Form id="teste">
         <Outlet />
       </Styles.Form>
       <Styles.Aside>

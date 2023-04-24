@@ -85,8 +85,6 @@ export function VideosProvider(props: { children: JSX.Element }) {
     try {
       if (!user?.id) return;
 
-      console.log(note);
-
       if (note.text.length < 1) {
         throw new Error("Note cannot be empty");
       }
@@ -206,7 +204,6 @@ export function VideosProvider(props: { children: JSX.Element }) {
 
   async function createManyNotes(notes: NoteData[]) {
     setIsLoading(true);
-    console.log({ notes });
 
     const notesToSave = notes.map((note) => ({
       ...note,

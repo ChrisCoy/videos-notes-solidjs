@@ -14,7 +14,7 @@ export default defineConfig({
   build: {
     outDir: outDir,
     minify: true,
-    sourcemap: true,
+    sourcemap: false,
     rollupOptions: {
       input: {
         script: resolve(__dirname, "src", "index.tsx"),

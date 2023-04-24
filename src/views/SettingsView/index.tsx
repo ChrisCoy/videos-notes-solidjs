@@ -52,7 +52,7 @@ const SettingsView: Component = () => {
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes",
       });
-  
+
       if (!result.isConfirmed) {
         event!.target!.value = "";
         return;
@@ -74,7 +74,6 @@ const SettingsView: Component = () => {
 
           createManyNotes(notesFromFile);
 
-          console.log(notesFromFile);
           event!.target!.value = "";
         } catch (error) {
           console.log(error);
@@ -86,23 +85,11 @@ const SettingsView: Component = () => {
       };
       reader.readAsText(file);
     } catch (error) {
-      
       toast.error("Invalid file format");
     }
   }
 
-  // const handleImportNotes:JSX.EventHandler<HTMLInputElement, > = (event)=>{
-  //   const file = event.target.files[0];
-  //   const reader = new FileReader();
-  //   reader.onload = (e) => {
-  //     const notes = JSON.parse(e.target.result as string);
-  //     console.log(notes);
-  //   };
-  //   reader.readAsText(file);
-  // }
-
   function handleSendFeedback() {
-    // alert("Not implemented yet");
     navigate("/send-feedback");
   }
 

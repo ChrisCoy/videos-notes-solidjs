@@ -52,6 +52,8 @@ const RegisterView: Component = () => {
         <DefaultInput
           inputLabel="Email"
           idAndName="email"
+          type="email"
+          required
           icon={<AiOutlineMail />}
           placeholder="email@provider.com"
         />
@@ -59,6 +61,7 @@ const RegisterView: Component = () => {
           inputLabel="Password"
           idAndName="password"
           type="password"
+          required
           placeholder="*********"
           icon={<RiSystemLockPasswordLine />}
         />

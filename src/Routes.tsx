@@ -10,6 +10,7 @@ import { LoginView } from "./views/LoginView";
 import { RegisterView } from "./views/RegisterView";
 import { SettingsView } from "./views/SettingsView";
 import { SendFeedbackView } from "./views/SendFeedbackView";
+import { ResetPwView } from "./views/ResetPwView";
 
 export default function Routes() {
   return (
@@ -17,6 +18,7 @@ export default function Routes() {
       <Route path={"/account"} element={<LoginLayout />}>
         <Route path={"/login"} element={<LoginView />} />
         <Route path={"/register"} element={<RegisterView />} />
+        <Route path={"/resetpw"} element={<ResetPwView />} />
       </Route>
       <Route path={"/"} element={<AppLayout />}>
         {/* CHANGE ALL THIS TO PROTECTED ROUTER */}
