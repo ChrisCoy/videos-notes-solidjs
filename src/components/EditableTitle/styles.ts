@@ -9,12 +9,18 @@ export const EditableTitleWrapper = styled.textarea`
   font-weight: 500;
   background: transparent;
   color: white;
-  border: 1px solid transparent;
-  outline: none;
+  border: 1px solid transparent !important;
+  outline: none !important;
   box-shadow: none;
   padding-right: 0.4rem;
   padding-bottom: 0.4rem;
   margin-bottom: -0.7rem;
   font-family: ${(p) => p.theme?.fonts.default};
   resize: none;
+
+  &:focus {
+    border: initial !important;
+    outline: none !important;
+    box-shadow: none;
+  }
 `;

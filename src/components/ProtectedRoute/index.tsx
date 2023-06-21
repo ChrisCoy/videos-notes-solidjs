@@ -16,7 +16,7 @@ const ProtectedRoute: Component<ProtectedRouteProps> = (props: ProtectedRoutePro
       path={props.path}
       element={() => {
         if (user?.id) return props.element;
-        else return <Navigate href={"/"} />;
+        else return <Navigate href={"/list"} />;
       }}
     />
   );

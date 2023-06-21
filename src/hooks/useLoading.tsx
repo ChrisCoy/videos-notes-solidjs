@@ -9,7 +9,7 @@ interface LoadingContextData {
 const LoadingContext = createContext({} as LoadingContextData);
 
 export function LoadingProvider(props: { children: JSX.Element }) {
-  const [isLoading, setIsLoading] = createSignal(true);
+  const [isLoading, setIsLoading] = createSignal(false);
 
   return (
     <LoadingContext.Provider value={{ isLoading, setIsLoading }}>

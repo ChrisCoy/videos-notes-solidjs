@@ -28,7 +28,7 @@ const ListItem: Component<ListItemProps> = (props: ListItemProps) => {
   const toast = useToast();
 
   function handleSeeNote(id: string) {
-    navigate("/" + id);
+    navigate("/details" + id);
   }
 
   function handleEditClick(id: string) {

@@ -23,10 +23,10 @@ export default function Routes() {
       <Route path={"/"} element={<AppLayout />}>
         {/* CHANGE ALL THIS TO PROTECTED ROUTER */}
         <Route path={"/send-feedback"} element={<SendFeedbackView />} />
-        <Route path={"/"} element={<ListNotesView />} />
-        <Route path={"/create"} element={<CreateNoteView />} />
+        <Route path={"/list"} element={<ListNotesView />} />
+        <Route path={"/"} element={<CreateNoteView />} />
         <Route path={"/edit/:id"} element={<EditNoteView />} />
-        <Route path={"/:id"} element={<DetailsNoteView />} />
+        <Route path={"/details/:id"} element={<DetailsNoteView />} />
         <Route path={"/settings"} element={<SettingsView />} />
       </Route>
     </AllRoutes>

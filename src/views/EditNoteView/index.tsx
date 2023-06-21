@@ -36,6 +36,8 @@ const EditNoteView: Component = () => {
       title: title()!,
       text: noteText()!,
     });
+
+    toast.info("Note updated");
     // saveNote({
     //   text: noteText(),
     //   title: title(),
@@ -49,7 +51,7 @@ const EditNoteView: Component = () => {
 
   if (!note) {
     toast.error("Note not found");
-    navigate("/");
+    navigate("/list");
   }
   return (
     <Styles.EditNoteViewWrapper>
@@ -68,7 +70,7 @@ const EditNoteView: Component = () => {
       </Styles.TitleContainer>
       <TextArea value={noteText()} onChange={(e) => setNoteText(e.currentTarget.value)} />
       <Styles.ButtonsContainer>
-        <Button noButton style={{ height: "36px" }} onClick={() => navigate("/")}>
+        <Button noButton style={{ height: "36px" }} onClick={() => navigate("/list")}>
           CANCEL
         </Button>
         <Button style={{ height: "36px" }} onClick={handleSaveNote}>

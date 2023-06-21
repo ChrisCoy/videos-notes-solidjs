@@ -28,7 +28,7 @@ const CreateNoteView: Component = () => {
       setTitle(videoInfo.title);
     } catch (error) {
       toast.error("Cannot create note from this page");
-      navigate("/");
+      navigate("/list");
     }
   });
 
@@ -63,7 +63,7 @@ const CreateNoteView: Component = () => {
       </Styles.TitleContainer>
       <TextArea value={noteText()} onChange={(e) => setNoteText(e.currentTarget.value)} />
       <Styles.ButtonsContainer>
-        <Button noButton style={{ height: "36px" }} onClick={() => navigate("/")}>
+        <Button noButton style={{ height: "36px" }} onClick={() => navigate("/list")}>
           CANCEL
         </Button>
         <Button style={{ height: "36px" }} onClick={handleSaveNote}>

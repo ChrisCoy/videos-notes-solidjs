@@ -65,8 +65,7 @@ export function VideosProvider(props: { children: JSX.Element }) {
     () => user?.id,
     async () => {
       if (!user?.id) return;
-      setIsLoading(true);
-      console.log("fetching notes");
+      // setIsLoading(true);
 
       const userQuery = query(
         ref,
@@ -104,7 +103,7 @@ export function VideosProvider(props: { children: JSX.Element }) {
       // setNotes((prevNotes) => [...(prevNotes || []), itemToAdd]);
 
       toast.info("Note saved!");
-      navigate("/");
+      navigate("/list");
       setIsLoading(false);
     } catch (error) {
       console.log(error);
@@ -198,7 +197,7 @@ export function VideosProvider(props: { children: JSX.Element }) {
       text: note.text,
       title: note.title,
     });
-    navigate("/");
+    navigate("/list");
     refetch();
   }
 

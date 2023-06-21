@@ -3,7 +3,7 @@
   "name": "Notes For Your Videos",
   "description": "A simple tool to create and share notes of videos or pages.",
   "homepage_url": "https://github.com/ChrisCoy/videos-notes-solidjs",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "action": {
     "default_popup": "popup.html",
     "default_title": "Notes for your videos",

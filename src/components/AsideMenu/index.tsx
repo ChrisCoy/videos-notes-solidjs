@@ -17,14 +17,14 @@ const AsideMenu: Component<AsideMenuProps> = (props: AsideMenuProps) => {
 
   return (
     <Styles.AsideMenuWrapper class={props.class}>
-      <Styles.Item
-        active={nav.pathname === "/create"}
-        onClick={() => navigate("/create")}
-        tabIndex={0}
-      >
+      <Styles.Item active={nav.pathname === "/"} onClick={() => navigate("/")} tabIndex={0}>
         <NotesIcon />
       </Styles.Item>
-      <Styles.Item active={nav.pathname === "/"} tabIndex={0} onClick={() => navigate("/")}>
+      <Styles.Item
+        active={nav.pathname === "/list"}
+        tabIndex={0}
+        onClick={() => navigate("/list")}
+      >
         <ListIcon />
       </Styles.Item>
       <Styles.Item

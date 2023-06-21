@@ -23,7 +23,7 @@ const DetailsNoteView: Component = () => {
 
   if (!note) {
     toast.error("Note not found");
-    navigate("/");
+    navigate("/list");
   }
 
   async function handleToVideo(note: NoteData) {
@@ -87,7 +87,7 @@ const DetailsNoteView: Component = () => {
       </Styles.TitleContainer>
       <TextArea value={note?.text} disabled />
       <Styles.ButtonsContainer>
-        <Button noButton style={{ height: "36px" }} onClick={() => navigate("/")}>
+        <Button noButton style={{ height: "36px" }} onClick={() => navigate("/list")}>
           BACK
         </Button>
         <Button style={{ height: "36px" }} onClick={() => handleToVideo(note!)}>
