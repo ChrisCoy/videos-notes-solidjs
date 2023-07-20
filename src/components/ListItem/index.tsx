@@ -28,7 +28,7 @@ const ListItem: Component<ListItemProps> = (props: ListItemProps) => {
   const toast = useToast();
 
   function handleSeeNote(id: string) {
-    navigate("/details" + id);
+    navigate("/details/" + id);
   }
 
   function handleEditClick(id: string) {
@@ -84,11 +84,17 @@ const ListItem: Component<ListItemProps> = (props: ListItemProps) => {
             </Show>
           </Styles.Title>
           <Styles.ButtonsContainer>
-            <button tabIndex={1} onClick={() => handleEditClick(props.note.id!)}>
+            <button
+              tabIndex={1}
+              onClick={() => handleEditClick(props.note.id!)}
+            >
               <PenIcon size={20} />
             </button>
 
-            <button tabIndex={1} onClick={() => handleDeleteClick(props.note.id!)}>
+            <button
+              tabIndex={1}
+              onClick={() => handleDeleteClick(props.note.id!)}
+            >
               <TrashIcon size={20} />
             </button>
           </Styles.ButtonsContainer>
